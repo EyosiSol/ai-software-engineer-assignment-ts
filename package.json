@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/EyosiSol/ai-software-engineer-assignment-ts#readme",
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
   }
 }
