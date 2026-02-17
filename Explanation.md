@@ -1,6 +1,8 @@
 # What is the Problem?
 
-- After installing and running `npx vitest` it appears to be that the third test is failing and it is failing because the the `c.oauthToken` variable is reciving a plain object. this is happening because in the httpClient.ts in the request method:
+- After installing and running `npx vitest` it appears to be that the third test is failing
+
+- it is failing because in the `request()` method the `oauthToken` variable is reciving a plain object in the test case but in the `httpClient` this case wasnt handled rather it was handling the issue when only it was an `OAuthToken` instance:
 
 ```javascript
 if (
@@ -23,7 +25,7 @@ if (!(this.oauth2Token instanceof OAuth2Token) || this.oauth2Token.expired) {
 
 # Description:
 
-The problem is a cause beacuse of typescript mixing of uniontypes issue
+The problem is a cause beacuse of typescript mixing of union types issue and the condition that hanndles it
 
 after changning this all the 3 test cases pass
 
@@ -37,7 +39,7 @@ The 3 tests cover most of the possible outcome of the situations that might happ
 new OAuth2Token("expired",Math.floor(Date.now() / 1000) - 100);  // this will simulate an expired one by utilizing the get Expired() because it returns true or false based on the "now" which is Date.now() / 1000 floored and it gets fired and sends false if the this.expired is less than the now hence by taking that return the httpClient runs the this.refreshOAuth2().
 ```
 
-so to test this edge case i have written this test case: 
+so to test this edge case i have written this test case:
 
 ```Typescript
 test("api=true refreshes when token is expired", () => {
@@ -52,4 +54,4 @@ test("api=true refreshes when token is expired", () => {
 
 ```
 
-and the code has successfully has passed all the four test cases. 
+and the code has successfully has passed all the four test cases.
