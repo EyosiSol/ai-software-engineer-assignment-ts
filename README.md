@@ -1,63 +1,54 @@
 # AI Experts Assignment (JS/TS)
 
-This assignment evaluates your ability to:
+This assignment will be subimmted to Eskalate Hiring team and it has evaluated my ability to:
 
 - set up a small JavaScript/TypeScript project to run reliably (locally + in Docker),
 - pin dependencies for reproducible installs,
 - write focused tests to reproduce a bug,
 - implement a minimal, reviewable fix.
 
-## What you will do
+## How to run this Project
 
-### 1) Dockerfile (required)
+## Run Tests LOCALLY
 
-Create a `Dockerfile` so the project can run the test suite in a non-interactive, CI-style environment.
+### Install the dependencies first
 
-Requirements:
+```bash
+npm install
+```
 
-- Your Docker image must run the test suite by default using npm test.
-- Ensure npm test works in a clean environment (Docker) without manual steps.
-- The build must install dependencies from package.json using npm install.
-- The image must run tests by default (use: `CMD ["npm", "test"]`).
+### Run the test
 
-### 2) Pin dependencies (required)
+```bash
+npm test
+```
 
-- Pin dependency versions in package.json (no ^ / ~; use exact x.y.z).
-- Do not commit lockfiles (package-lock.json, yarn.lock, pnpm-lock.yaml).
+- This will run the vitest run of all the tests
 
-### 3) README updates (required)
+## Run Test using Docker by creating the image
 
-Update this README to include:
+### Is docker installed?
 
-- how to run the tests locally,
-- how to build and run tests with Docker.
+- Make sure that docker is installed in your machine
 
-### 4) Find + fix a bug (required)
+```bash
+docker --version
+```
 
-There is a bug somewhere in this repository.
+- If so it will yeild `Docker version (versionNumber), build (buildnumber)`
 
-Your tasks:
+### Build the Docker Image
 
-- Identify the bug.
-- Apply the smallest possible fix to make the tests pass.
-- Keep the change minimal and reviewable (no refactors).
+```bash
+docker build -t aisoftwareengineeringassignment .
+```
 
-## Constraints
+#### Note: instead of aisoftwareengineeringassignment you can have the name set by urself just make sure it is all lowercase
 
-- Keep changes minimal and reviewable.
-- Do not refactor unrelated code.
-- Do not introduce extra tooling unless required.
-- You may add tests and the smallest code change needed to fix the bug.
+### Run the built Docker Image
 
-### 5) EXPLANATION.md (required)
+```bash
+docker run --rm aisoftwareengineeringassignment
+```
 
-Create `EXPLANATION.md` (max 250 words) containing:
-
-- **What was the bug?**
-- **Why did it happen?**
-- **Why does your fix solve it?**
-- **One realistic case / edge case your tests still don’t cover**
-
-## Submission
-
-- Submit a public GitHub repository URL containing your solution to the Google form link provided.
+- After running this the docker will automatically run the `npm test`
